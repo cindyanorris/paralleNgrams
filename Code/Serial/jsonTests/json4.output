@@ -1,0 +1,12 @@
+
+{
+"str1" : "value1", 
+"str2" : 
+{
+"one" : "val1", 
+"two" : "val2", 
+"three" : "val3"
+}, 
+"str3" : "value3", 
+"str4" : "value4"
+}

@@ -1,0 +1,17 @@
+1) Input file that contains directions
+Training Data Paths
+Test Data Paths
+Amount of each file to use for training (in bytes)
+size of ngram
+bytes or words
+2) Parse input file to build a Json object
+3) Build a giant hash table
+Each element in table will contain:
+ngram
+number of occurrences in each class (class is a set of authors)
+4) For each author, calculate prior probabilities:
+number of docs written by doc/total number of documents
+calculate natural log of that
+5) For each element in hashtable calculate the likelihood per author
+6) For each text in the testing set, calculate the final probabilities
+and output the class with the maximum probability
