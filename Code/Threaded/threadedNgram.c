@@ -5,6 +5,7 @@
 #include <string.h>
 #include <pthread.h>
 #include <unistd.h>
+#include <time.h>
 #include "usage.h"
 #include "parseArgument.h"
 #include "hashTable.h"
@@ -48,6 +49,10 @@ int main(int argc, char * argv[])
 { 
    int i, j;
 
+   struct timespec start, finish;
+   double elapsed;
+   clock_gettime(CLOCK_MONOTONIC, &start);
+
    if (argc < 2 || access(argv[1], R_OK )) usage();
    objectT * jsonObj = buildJsonObject(argv[1]);
    //printJsonObject(jsonObj);
@@ -85,6 +90,12 @@ int main(int argc, char * argv[])
    int totalCorrect = checkCorrect(naivebayes);
    printf("\n%d out of %d correct: %.2f%%\n", totalCorrect, numTestingTxts,
           totalCorrect/(float)numTestingTxts * 100);
+
+   clock_gettime(CLOCK_MONOTONIC, &finish);
+   elapsed = (finish.tv_sec - start.tv_sec);
+   elapsed += (finish.tv_nsec - start.tv_nsec) / 1000000000.0;
+   printf("threadedNgram took %f seconds to execute \n", elapsed);
+
    return 0;
 }
 
